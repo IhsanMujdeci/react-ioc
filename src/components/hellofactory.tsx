@@ -1,5 +1,5 @@
 import {PostStore} from "./context";
-import {Hello} from "./hello";
+import Hello from "./hello";
 
 export function helloFactory(postStore: PostStore) {
     return{

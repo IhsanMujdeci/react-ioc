@@ -3,7 +3,7 @@ import {ComponentProvider, PostStore} from './context'
 import { useSubscribe } from 'use-subscribe'
 
 
-export const Hello = (postStore: PostStore) => function Hello(){
+export default (postStore: PostStore) => function Hello(){
 
     const posts = useSubscribe(postStore.posts);
 
