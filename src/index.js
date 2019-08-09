@@ -1,12 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { PostStore } from './platform/posts'
+import { render } from 'react-dom';
+// Imagine this lives in npm and is static.
+import {helloFactory} from "./components/hellofactory";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const postStore = new PostStore();
+const {Hello} = helloFactory(postStore);
+// This is your route/page, etc
+// You compose the components from that npm library
+// after you have satisfied their context dependencies
+const Home = () => {
+    return <div><Hello/></div>
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// Create and assemble dependency graph here
+// using property or constructor injection.
+// This is inversion of control
+
+
+// ComponentProvider describes its own dependencies
+// with interfaces. This is dependency inversion
+export const App = () => (
+    <Home/>
+);
+
+render(<App />, document.getElementById('root'));
